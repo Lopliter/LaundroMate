@@ -50,6 +50,8 @@ class LoginListener implements ActionListener {
             br.close();
             if (pwd.equals(login.passwordField.getText())) {
                 JOptionPane.showMessageDialog(null, "登录成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+                Home home = new Home();
+                login.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "密码错误！", "提示", JOptionPane.INFORMATION_MESSAGE);
             }

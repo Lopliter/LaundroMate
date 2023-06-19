@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static Windows.LoginListener.login;
+
 public class Register extends JFrame {
     JTextField usernameField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
@@ -25,8 +27,8 @@ public class Register extends JFrame {
         usernameField.setBounds(100, 20, 150, 20);
         passwordLabel.setBounds(50, 50, 50, 20);
         passwordField.setBounds(100, 50, 150, 20);
-        passwordConfirmLabel.setBounds(20, 80, 80, 20); // 调整位置
-        passwordConfirmField.setBounds(100, 80, 150, 20); // 调整位置和宽度
+        passwordConfirmLabel.setBounds(20, 80, 80, 20);
+        passwordConfirmField.setBounds(100, 80, 150, 20);
         registerButton.setBounds(50, 110, 100, 20);
         add(usernameLabel);
         add(usernameField);
@@ -36,12 +38,16 @@ public class Register extends JFrame {
         add(passwordConfirmField);
         add(registerButton);
         setVisible(true);
-        registerButton.addActionListener(new RegisterButtonListener());
+        registerButton.addActionListener(new RegisterButtonListener(login));
         RegisterButtonListener.register = this;
     }
 }
 class RegisterButtonListener implements ActionListener {
     static Register register;
+    static Login login;
+    public RegisterButtonListener(Login l) {
+        RegisterButtonListener.login = l;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         File file = new File("./pwd/"+register.usernameField.getText() + ".txt");
@@ -64,8 +70,11 @@ class RegisterButtonListener implements ActionListener {
                 FileOutputStream fos = new FileOutputStream(file);
                 fos.write(register.passwordField.getText().getBytes());
                 fos.close();
+                login.usernameField.setText(register.usernameField.getText());
+                login.passwordField.setText(register.passwordField.getText());;
+                login.setVisible(true);
                 register.dispose();
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "两次密码不一致！", "提示", JOptionPane.ERROR_MESSAGE);
             }

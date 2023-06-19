@@ -11,11 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3f597ff2-9da3-4b93-a14c-c63d345b3dac" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/123.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/1234.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/aaa.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/Lopliter.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Windows/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Windows/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Windows/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Register.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687137688611</updated>
-      <workItem from="1687137689644" duration="21233000" />
+      <workItem from="1687137689644" duration="28824000" />
     </task>
     <servers />
   </component>

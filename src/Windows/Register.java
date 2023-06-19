@@ -68,11 +68,13 @@ class RegisterButtonListener implements ActionListener {
             if(register.passwordField.getText().equals(register.passwordConfirmField.getText())){
                 File userdata = new File("./data/data.txt");
                 File usertype = new File("./data/types.txt");
+                File customer = new File("./data/customers.txt");
                 if(userdata.exists()){
                     JOptionPane.showMessageDialog(null, "由于已存在数据，您的账号被设置为负责人账户。", "提示", JOptionPane.ERROR_MESSAGE);
                 }
                 userdata.createNewFile();
                 usertype.createNewFile();
+                customer.createNewFile();
                 FileOutputStream typefos = new FileOutputStream(usertype);
                 typefos.write("业务一,业务二".getBytes());
                 JOptionPane.showMessageDialog(null, "注册成功，请登录！", "提示", JOptionPane.INFORMATION_MESSAGE);

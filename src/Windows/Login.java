@@ -57,6 +57,9 @@ class LoginListener implements ActionListener {
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "用户不存在，请先注册！", "提示", JOptionPane.INFORMATION_MESSAGE);
+            Register register = new Register();
+            register.usernameField.setText(LoginListener.login.usernameField.getText());
+            LoginListener.login.dispose();
         }
     }
 }
@@ -64,5 +67,7 @@ class RegisterListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Register register = new Register();
+        register.usernameField.setText(LoginListener.login.usernameField.getText());
+        LoginListener.login.dispose();
     }
 }

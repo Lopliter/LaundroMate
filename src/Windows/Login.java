@@ -34,6 +34,9 @@ public class Login extends JFrame {
         loginButton.addActionListener(new LoginListener());
         registerButton.addActionListener(new RegisterListener());
         LoginListener.login = this;
+        revalidate();
+        repaint();
+
     }
 }
 class LoginListener implements ActionListener {

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import static Windows.LoginListener.login;
@@ -16,7 +17,7 @@ public class Register extends JFrame {
     public Register(){
         super("注册");
         setSize(300, 200);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
         JLabel usernameLabel = new JLabel("用户名");
@@ -65,6 +66,15 @@ class RegisterButtonListener implements ActionListener {
         }
         try {
             if(register.passwordField.getText().equals(register.passwordConfirmField.getText())){
+                File userdata = new File("./data/data.txt");
+                File usertype = new File("./data/types.txt");
+                if(userdata.exists()){
+                    JOptionPane.showMessageDialog(null, "由于已存在数据，您的账号被设置为负责人账户。", "提示", JOptionPane.ERROR_MESSAGE);
+                }
+                userdata.createNewFile();
+                usertype.createNewFile();
+                FileOutputStream typefos = new FileOutputStream(usertype);
+                typefos.write("业务一,业务二".getBytes());
                 JOptionPane.showMessageDialog(null, "注册成功，请登录！", "提示", JOptionPane.INFORMATION_MESSAGE);
                 file.createNewFile();
                 FileOutputStream fos = new FileOutputStream(file);

@@ -26,14 +26,20 @@ public class Home extends JFrame {
     JTextField contactField;
     ArrayList<String[]> customers = new ArrayList<>();
     JTable customerTable;
-    JComboBox<String> customerBox = new JComboBox<>(getCustomerNames());;
-
+    JComboBox<String> customerBox = new JComboBox<>(getCustomerNames());
+    File typesFile = new File("./data/types.txt");
     public Home() throws IOException {
         super("LaundroMate");
+        File customerFile = new File("./data/customers.txt");
+        BufferedReader customerBr = new BufferedReader(new FileReader(customerFile));
+        String read;
+        while ((read = customerBr.readLine())!=null){
+            customers.add(read.split(","));
+        }
         data = new File("./data/data.txt");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTabbedPane tabbedPane = new JTabbedPane();
-        setSize(900, 600);
+        setBounds(600, 300, 900, 600);
         setResizable(false);
         JPanel AdminPanel = new JPanel();
         tabbedPane.addTab("洗衣项目信息", AdminPanel);
@@ -73,7 +79,7 @@ public class Home extends JFrame {
         inputPanel.add(amountField);
         File typeFile = new File("./data/types.txt");
         BufferedReader br = new BufferedReader(new FileReader(typeFile));
-        String[] types = new String[]{""};
+        String[] types;
         types = br.readLine().split(",");
         typeBox = new JComboBox<>(types);
         inputPanel.add(new JLabel("项目类型:"));
@@ -106,13 +112,8 @@ public class Home extends JFrame {
         fileMenu.add(saveMenuItem);
         JMenuItem searchMenuItem = new JMenuItem("洗衣项目查询");
         fileMenu.add(searchMenuItem);
-        JMenu settingsMenu = new JMenu("设置");
-        JMenuItem typeSettingsMenuItem = new JMenuItem("项目类型管理");
-        typeSettingsMenuItem.addActionListener(new TypeSettingsActionListener(typeBox));
-        settingsMenu.add(typeSettingsMenuItem);
         searchMenuItem.addActionListener(new SearchActionListener(table, model));
         menuBar.add(fileMenu);
-        menuBar.add(settingsMenu);//刚才放反了可还行
         setJMenuBar(menuBar);
         customerPanel.setLayout(new BorderLayout());
         //客户管理相关的控件
@@ -137,9 +138,9 @@ public class Home extends JFrame {
         JButton deleteCustomerButton = new JButton("删除客户");
         deleteCustomerButton.addActionListener(new DeleteCustomerButtonListener());
         customerInputPanel.add(deleteCustomerButton);
-        File customerFile = new File("./data/customers.txt");
+        File customerFile2 = new File("./data/customers.txt");
         try {
-            Scanner scanner = new Scanner(customerFile);
+            Scanner scanner = new Scanner(customerFile2);
             while (scanner.hasNextLine()) {
                 String[] rowData = scanner.nextLine().split(",");
                 customerModel.addRow(rowData);
@@ -149,6 +150,40 @@ public class Home extends JFrame {
             e.printStackTrace();
         }
         customerPanel.add(customerInputPanel, BorderLayout.SOUTH);
+        //项目类型管理嗷
+        DefaultTableModel typeModel = new DefaultTableModel();
+        typeModel.addColumn("类型名称");
+        JPanel typeManagementPanel = new JPanel(new BorderLayout());
+        tabbedPane.addTab("类型管理", typeManagementPanel);
+        JTable typeTable = new JTable(typeModel){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        JScrollPane typeScrollPane = new JScrollPane(typeTable);
+        typeManagementPanel.add(typeScrollPane, BorderLayout.CENTER);
+        JPanel typeOperationsPanel = new JPanel();
+        typeManagementPanel.add(typeOperationsPanel, BorderLayout.SOUTH);
+        JTextField typeField = new JTextField(15);
+        JButton addTypeButton = new JButton("添加类型");
+        JButton removeTypeButton = new JButton("删除选中类型");
+        typeOperationsPanel.add(new JLabel("类型名称:"));
+        typeOperationsPanel.add(typeField);
+        typeOperationsPanel.add(addTypeButton);
+        typeOperationsPanel.add(removeTypeButton);
+        addTypeButton.addActionListener(new AddTypeButtonListener(typeModel, typeField, typeBox, typesFile));
+        removeTypeButton.addActionListener(new RemoveTypeButtonListener(typeTable, typeModel, typeBox, typesFile));
+        File typeFile2 = new File("./data/types.txt");
+        try {
+            BufferedReader br2 = new BufferedReader(new FileReader(typeFile2));
+            String[] types2;
+            types2 = br2.readLine().split(",");
+            for (int i=0;i<types2.length;i++){
+                typeModel.addRow(new Object[]{types2[i]});
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         revalidate();
         repaint();
     }
@@ -284,45 +319,6 @@ public class Home extends JFrame {
             }
         }
     }
-    class TypeSettingsActionListener implements ActionListener {
-        JComboBox<String> typeBox;
-
-        public TypeSettingsActionListener(JComboBox<String> typeBox) {
-            this.typeBox = typeBox;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JFrame typeFrame = new JFrame("项目类型管理");
-            typeFrame.setSize(300, 200);
-            typeFrame.setLocationRelativeTo(null);
-            JPanel typePanel = new JPanel(new BorderLayout());
-            JTextField typeField = new JTextField();
-            JButton addTypeButton = new JButton("添加类型");
-            addTypeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String newType = typeField.getText();
-                    if (!newType.isEmpty()) {
-                        typeBox.addItem(newType);
-                        typeField.setText("");
-                    }
-                }
-            });
-            JButton removeTypeButton = new JButton("删除选中类型");
-            removeTypeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    typeBox.removeItem(typeBox.getSelectedItem());
-                }
-            });
-            typePanel.add(typeField, BorderLayout.NORTH);
-            typePanel.add(addTypeButton, BorderLayout.CENTER);
-            typePanel.add(removeTypeButton, BorderLayout.SOUTH);
-            typeFrame.add(typePanel);
-            typeFrame.setVisible(true);
-        }
-    }
     class AddCustomerButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (!customerNameField.getText().isEmpty() && !contactField.getText().isEmpty()) {
@@ -360,6 +356,87 @@ public class Home extends JFrame {
         }
         reader.close();
         return customers.toArray(new String[0]);
+    }
+    class AddTypeButtonListener implements ActionListener {
+        private DefaultTableModel model;
+        private JTextField typeField;
+        private JComboBox<String> typeBox;
+        private File typesFile;
+
+        public AddTypeButtonListener(DefaultTableModel model, JTextField typeField, JComboBox<String> typeBox, File typesFile) {
+            this.model = model;
+            this.typeField = typeField;
+            this.typeBox = typeBox;
+            this.typesFile = typesFile;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String newType = typeField.getText();
+            if (!newType.isEmpty()) {
+                model.addRow(new Object[]{newType});
+                typeBox.addItem(newType);
+                writeTypesToFile();
+                typeField.setText("");
+            }
+        }
+
+        private void writeTypesToFile() {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(typesFile))) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < typeBox.getItemCount(); i++) {
+                    sb.append(typeBox.getItemAt(i));
+                    if (i != typeBox.getItemCount() - 1) {
+                        sb.append(",");
+                    }
+                }
+                writer.println(sb.toString());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    class RemoveTypeButtonListener implements ActionListener {
+        private JTable table;
+        private DefaultTableModel model;
+        private JComboBox<String> typeBox;
+        private File typesFile;
+
+        public RemoveTypeButtonListener(JTable table, DefaultTableModel model, JComboBox<String> typeBox, File typesFile) {
+            this.table = table;
+            this.model = model;
+            this.typeBox = typeBox;
+            this.typesFile = typesFile;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) {
+                String typeName = (String)model.getValueAt(selectedRow, 0);
+                model.removeRow(selectedRow);
+                typeBox.removeItem(typeName);
+                writeTypesToFile();
+            } else {
+                JOptionPane.showMessageDialog(null, "请选择一个类型", "错误", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        private void writeTypesToFile() {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(typesFile))) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < typeBox.getItemCount(); i++) {
+                    sb.append(typeBox.getItemAt(i));
+                    if (i != typeBox.getItemCount() - 1) {
+                        sb.append(",");
+                    }
+                }
+                writer.println(sb.toString());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
     public static void main(String[] args) throws IOException {
         Home home = new Home();

@@ -5,9 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-
 import static Windows.LoginListener.login;
 
 public class Register extends JFrame {
@@ -16,7 +14,7 @@ public class Register extends JFrame {
     JPasswordField passwordConfirmField = new JPasswordField();
     public Register(){
         super("注册");
-        setSize(300, 200);
+        setBounds(500, 200, 300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
@@ -67,6 +65,10 @@ class RegisterButtonListener implements ActionListener {
         try {
             if(register.passwordField.getText().equals(register.passwordConfirmField.getText())){
                 File userdata = new File("./data/data.txt");
+                File pwdDir = new File("./pwd");
+                pwdDir.mkdirs();
+                File dataDir = new File("./data");
+                dataDir.mkdirs();
                 File usertype = new File("./data/types.txt");
                 File customer = new File("./data/customers.txt");
                 if(userdata.exists()){

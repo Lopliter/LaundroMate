@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="unnamed" />
+      <artifact name="LaundroMate:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,10 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f597ff2-9da3-4b93-a14c-c63d345b3dac" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/customers.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/Lopliter.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/types.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/types.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Run.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Windows/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Windows/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Windows/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Register.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,14 +51,16 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/OneDrive/OneDrive - LingX泠汐/学习/Java/Test230619/untitled",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "onboarding.tips.debug.path": "/Users/literlop/Library/CloudStorage/OneDrive-LingX泠汐/学习/Java/课设/项目源代码/LaundroMate/src/Main.java",
-    "project.structure.last.edited": "工件",
+    "project.structure.last.edited": "SDK",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propCompiler",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -66,6 +73,13 @@
       <option name="presentableId" value="Default" />
       <updated>1687137688611</updated>
       <workItem from="1687137689644" duration="28824000" />
+      <workItem from="1687177691179" duration="161000" />
+      <workItem from="1687180203242" duration="2775000" />
+      <workItem from="1687185528321" duration="15000" />
+      <workItem from="1687219757829" duration="442000" />
+      <workItem from="1687220292414" duration="1617000" />
+      <workItem from="1687222431524" duration="3362000" />
+      <workItem from="1687225820014" duration="2002000" />
     </task>
     <servers />
   </component>

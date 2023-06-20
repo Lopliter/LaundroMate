@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LaundroMate:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LaundroMate_jar</output-path>
+    <root id="archive" name="LaundroMate.jar">
+      <element id="module-output" name="LaundroMate" />
+    </root>
+  </artifact>
+</component>

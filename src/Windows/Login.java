@@ -10,7 +10,7 @@ public class Login extends JFrame {
     JPasswordField passwordField = new JPasswordField();
     public Login() {
         super("登录");
-        setSize(300, 200);
+        setBounds(500, 200, 300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
@@ -23,8 +23,8 @@ public class Login extends JFrame {
         usernameField.setBounds(100, 20, 100, 20);
         passwordLabel.setBounds(50, 50, 50, 20);
         passwordField.setBounds(100, 50, 100, 20);
-        loginButton.setBounds(50, 80, 50, 20);
-        registerButton.setBounds(100, 80, 50, 20);
+        loginButton.setBounds(50, 80, 60, 30);
+        registerButton.setBounds(120, 80, 60, 30);
         add(usernameLabel);
         add(usernameField);
         add(passwordLabel);

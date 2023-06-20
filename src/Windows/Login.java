@@ -20,9 +20,9 @@ public class Login extends JFrame {
         JButton registerButton = new JButton("注册");
         setLayout(null);
         usernameLabel.setBounds(50, 20, 50, 20);
-        usernameField.setBounds(100, 20, 100, 20);
+        usernameField.setBounds(100, 20, 140, 20);
         passwordLabel.setBounds(50, 50, 50, 20);
-        passwordField.setBounds(100, 50, 100, 20);
+        passwordField.setBounds(100, 50, 140, 20);
         loginButton.setBounds(50, 80, 60, 30);
         registerButton.setBounds(120, 80, 60, 30);
         add(usernameLabel);

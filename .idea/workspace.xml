@@ -10,16 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f597ff2-9da3-4b93-a14c-c63d345b3dac" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/customers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/types.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/types.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Run.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Windows/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Windows/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Windows/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Windows/Register.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +71,7 @@
       <workItem from="1687219757829" duration="442000" />
       <workItem from="1687220292414" duration="1617000" />
       <workItem from="1687222431524" duration="3362000" />
-      <workItem from="1687225820014" duration="2002000" />
+      <workItem from="1687225820014" duration="3339000" />
     </task>
     <servers />
   </component>

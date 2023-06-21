@@ -29,6 +29,7 @@ public class Home extends JFrame {
     JTable customerTable;
     JComboBox<String> customerBox = new JComboBox<>(getCustomerNames());
     File typesFile = new File("./data/types.txt");
+    ArrayList DeletedCustomers = new ArrayList();;
     public Home() throws IOException {
         super("LaundroMate");
         addWindowListener(new WindowAdapter() {
@@ -217,6 +218,7 @@ public class Home extends JFrame {
         public void actionPerformed(ActionEvent e) {
             int selectedRow = table.getSelectedRow();
             if (selectedRow != -1) {
+                DeletedCustomers.add(selectedRow);
                 model.removeRow(selectedRow);
             }
         }
@@ -236,10 +238,20 @@ public class Home extends JFrame {
                     writer.newLine();
                 }
                 writer.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            try {
+                for( int i = customerModel.getRowCount() - 1; i >= 0; i-- ) {
+                    String[] customerRow = new String[2];
+                    for (int j = 0; j < customerModel.getColumnCount(); j++) {
+                        customerTable.getValueAt(i, j);
+                        customerRow[j] = customerTable.getValueAt(i, j).toString();
+                    }
+                }
+                for (int i = 0; i < DeletedCustomers.size(); i++) {
+                    for (int j = 0; j< customers.size();j++){
+                        if (customers.get(j)[0].equals(DeletedCustomers.get(i))){
+                            customers.remove(j);
+                        }
+                    }
+                }
                 BufferedWriter customerWriter = new BufferedWriter(new FileWriter("./data/customers.txt"));
                 for (String[] customer : customers) {
                     customerWriter.write(customer[0] + "," + customer[1]);
@@ -351,6 +363,7 @@ public class Home extends JFrame {
                 String customerName = (String)customerModel.getValueAt(selectedRow, 0);
                 customerModel.removeRow(selectedRow);
                 customerBox.removeItem(customerName);
+                DeletedCustomers.add(customerName);
                 customers.remove(customerName);
             } else {
                 JOptionPane.showMessageDialog(null, "请选择一个客户", "错误", JOptionPane.ERROR_MESSAGE);
